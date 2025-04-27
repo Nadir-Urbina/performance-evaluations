@@ -7,6 +7,7 @@ import { db } from "@/lib/firebase";
 import { useAuth } from "@/providers/auth-provider";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface JobFunction {
   id: string;
@@ -79,7 +80,7 @@ export default function JobFunctionsPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8 max-w-6xl mx-auto">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold tracking-tight">Job Functions</h1>
         <Button asChild>
@@ -89,61 +90,68 @@ export default function JobFunctionsPage() {
         </Button>
       </div>
       
-      {isLoading ? (
-        <div className="flex justify-center items-center py-8">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-        </div>
-      ) : jobFunctions.length === 0 ? (
-        <div className="rounded-md border">
-          <div className="p-6 flex flex-col items-center justify-center min-h-[200px] text-center space-y-3">
-            <h3 className="text-lg font-medium">No job functions defined yet</h3>
-            <p className="text-sm text-muted-foreground">
-              Get started by adding job functions for your organization.
-            </p>
-            <Button asChild className="mt-4">
-              <Link href="/job-functions/new">
-                Add Job Function
-              </Link>
-            </Button>
-          </div>
-        </div>
-      ) : (
-        <div className="rounded-md border">
-          <div className="relative w-full overflow-auto">
-            <table className="w-full caption-bottom text-sm">
-              <thead className="[&_tr]:border-b">
-                <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                  <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Name</th>
-                  <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Manager</th>
-                  <th className="h-12 px-4 text-right align-middle font-medium text-muted-foreground">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="[&_tr:last-child]:border-0">
-                {jobFunctions.map((jobFunction) => (
-                  <tr key={jobFunction.id} className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                    <td className="p-4 align-middle font-medium">{jobFunction.name}</td>
-                    <td className="p-4 align-middle">{jobFunction.manager || "—"}</td>
-                    <td className="p-4 align-middle text-right">
-                      <div className="flex items-center justify-end gap-2">
-                        <Button variant="outline" size="sm" asChild>
-                          <Link href={`/job-functions/${jobFunction.id}/edit`}>Edit</Link>
-                        </Button>
-                        <Button 
-                          variant="destructive" 
-                          size="sm" 
-                          onClick={() => handleDelete(jobFunction.id)}
-                        >
-                          Delete
-                        </Button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
+      <Card className="shadow-sm">
+        <CardHeader className="pb-3">
+          <CardTitle>All Job Functions</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {isLoading ? (
+            <div className="flex justify-center items-center py-8">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+            </div>
+          ) : jobFunctions.length === 0 ? (
+            <div className="rounded-md border">
+              <div className="p-8 flex flex-col items-center justify-center min-h-[200px] text-center space-y-3">
+                <h3 className="text-lg font-medium">No job functions defined yet</h3>
+                <p className="text-sm text-muted-foreground">
+                  Get started by adding job functions for your organization.
+                </p>
+                <Button asChild className="mt-4">
+                  <Link href="/job-functions/new">
+                    Add Job Function
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <div className="rounded-md border">
+              <div className="relative w-full overflow-auto">
+                <table className="w-full caption-bottom text-sm">
+                  <thead className="bg-muted/50 sticky top-0">
+                    <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                      <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Name</th>
+                      <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Manager</th>
+                      <th className="h-12 px-4 text-right align-middle font-medium text-muted-foreground">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="[&_tr:last-child]:border-0">
+                    {jobFunctions.map((jobFunction) => (
+                      <tr key={jobFunction.id} className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+                        <td className="p-4 align-middle font-medium">{jobFunction.name}</td>
+                        <td className="p-4 align-middle">{jobFunction.manager || "—"}</td>
+                        <td className="p-4 align-middle text-right">
+                          <div className="flex items-center justify-end gap-2">
+                            <Button variant="outline" size="sm" asChild>
+                              <Link href={`/job-functions/${jobFunction.id}/edit`}>Edit</Link>
+                            </Button>
+                            <Button 
+                              variant="destructive" 
+                              size="sm" 
+                              onClick={() => handleDelete(jobFunction.id)}
+                            >
+                              Delete
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 } 

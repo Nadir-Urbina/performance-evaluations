@@ -7,6 +7,8 @@ import { db } from "@/lib/firebase";
 import { useAuth } from "@/providers/auth-provider";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { trackEmployeeActivity } from "@/lib/services/activity-service";
 
 interface EmployeeFormProps {
   initialData?: {
@@ -97,7 +99,17 @@ export default function EmployeeForm({ initialData, isEditing = false }: Employe
         });
       } else {
         // Create new employee
-        await addDoc(collection(db, "employees"), employeeData);
+        const docRef = await addDoc(collection(db, "employees"), employeeData);
+        
+        // Track the activity
+        await trackEmployeeActivity({
+          organizationId: user.organizationId,
+          userId: user.id,
+          userName: user.fullName,
+          type: "employee_added",
+          employeeId: docRef.id,
+          employeeName: formData.fullName,
+        });
         
         toast({
           variant: "success",
@@ -122,95 +134,102 @@ export default function EmployeeForm({ initialData, isEditing = false }: Employe
   };
   
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid gap-4 md:grid-cols-2">
-        <div className="space-y-2">
-          <label className="text-sm font-medium leading-none" htmlFor="fullName">
-            Full Name <span className="text-red-500">*</span>
-          </label>
-          <input
-            id="fullName"
-            name="fullName"
-            type="text"
-            value={formData.fullName}
-            onChange={handleChange}
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            required
-          />
-        </div>
+    <Card className="w-full max-w-4xl mx-auto shadow-sm">
+      <CardHeader>
+        <CardTitle>{isEditing ? "Edit Employee" : "Add New Employee"}</CardTitle>
+      </CardHeader>
+      <form onSubmit={handleSubmit}>
+        <CardContent className="space-y-6">
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="space-y-2">
+              <label className="text-sm font-medium leading-none" htmlFor="fullName">
+                Full Name <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="fullName"
+                name="fullName"
+                type="text"
+                value={formData.fullName}
+                onChange={handleChange}
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                required
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <label className="text-sm font-medium leading-none" htmlFor="email">
+                Email <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                required
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <label className="text-sm font-medium leading-none" htmlFor="phone">
+                Phone Number
+              </label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                value={formData.phone}
+                onChange={handleChange}
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <label className="text-sm font-medium leading-none" htmlFor="role">
+                Role <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="role"
+                name="role"
+                type="text"
+                value={formData.role}
+                onChange={handleChange}
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                required
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <label className="text-sm font-medium leading-none" htmlFor="supervisorEmail">
+                Supervisor Email
+              </label>
+              <input
+                id="supervisorEmail"
+                name="supervisorEmail"
+                type="email"
+                value={formData.supervisorEmail}
+                onChange={handleChange}
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              />
+            </div>
+          </div>
+        </CardContent>
         
-        <div className="space-y-2">
-          <label className="text-sm font-medium leading-none" htmlFor="email">
-            Email <span className="text-red-500">*</span>
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            required
-          />
-        </div>
-        
-        <div className="space-y-2">
-          <label className="text-sm font-medium leading-none" htmlFor="phone">
-            Phone Number
-          </label>
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            value={formData.phone}
-            onChange={handleChange}
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-          />
-        </div>
-        
-        <div className="space-y-2">
-          <label className="text-sm font-medium leading-none" htmlFor="role">
-            Role <span className="text-red-500">*</span>
-          </label>
-          <input
-            id="role"
-            name="role"
-            type="text"
-            value={formData.role}
-            onChange={handleChange}
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            required
-          />
-        </div>
-        
-        <div className="space-y-2">
-          <label className="text-sm font-medium leading-none" htmlFor="supervisorEmail">
-            Supervisor Email
-          </label>
-          <input
-            id="supervisorEmail"
-            name="supervisorEmail"
-            type="email"
-            value={formData.supervisorEmail}
-            onChange={handleChange}
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-          />
-        </div>
-      </div>
-      
-      <div className="flex justify-end space-x-4">
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => router.back()}
-          disabled={isLoading}
-        >
-          Cancel
-        </Button>
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Saving..." : isEditing ? "Update Employee" : "Add Employee"}
-        </Button>
-      </div>
-    </form>
+        <CardFooter className="flex justify-end space-x-4 pt-2">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => router.back()}
+            disabled={isLoading}
+          >
+            Cancel
+          </Button>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? "Saving..." : isEditing ? "Update Employee" : "Add Employee"}
+          </Button>
+        </CardFooter>
+      </form>
+    </Card>
   );
 } 

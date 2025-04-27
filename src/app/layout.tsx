@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from "@/providers/auth-provider";
 import { Analytics } from "@vercel/analytics/react";
+import { Toaster as SonnerToaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
           {children}
           <Toaster />
         </AuthProvider>
+        <SonnerToaster position="top-right" />
         <Analytics />
       </body>
     </html>

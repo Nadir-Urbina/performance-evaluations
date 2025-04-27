@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/providers/auth-provider";
 import DashboardNav from "@/components/dashboard/dashboard-nav";
 import UserAccountNav from "@/components/dashboard/user-account-nav";
-import { Toaster } from "@/components/ui/toaster";
 
 export default function AuthenticatedLayout({
   children,
@@ -50,7 +49,7 @@ export default function AuthenticatedLayout({
   if (loading || (firebaseUser && !user)) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <div className="text-center">
+        <div className="text-center max-w-md mx-auto p-6 border rounded-lg shadow-sm">
           <h2 className="text-xl font-semibold">Loading...</h2>
           <p className="text-sm text-muted-foreground">
             Please wait while we load your data.
@@ -69,7 +68,7 @@ export default function AuthenticatedLayout({
   if (error) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <div className="text-center">
+        <div className="text-center max-w-md mx-auto p-6 border rounded-lg shadow-sm">
           <h2 className="text-xl font-semibold text-red-500">Error</h2>
           <p className="text-sm">{error}</p>
           <button 
@@ -87,7 +86,7 @@ export default function AuthenticatedLayout({
   return (
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-40 border-b bg-background">
-        <div className="container flex h-16 items-center justify-between py-4">
+        <div className="container max-w-7xl mx-auto flex h-16 items-center justify-between py-4 px-4 md:px-6">
           <DashboardNav />
           {user && (
             <UserAccountNav user={user} />
@@ -95,11 +94,10 @@ export default function AuthenticatedLayout({
         </div>
       </header>
       <main className="flex-1">
-        <div className="container py-6">
+        <div className="container max-w-7xl mx-auto py-8 px-4 md:px-6">
           {children}
         </div>
       </main>
-      <Toaster />
     </div>
   );
 } 

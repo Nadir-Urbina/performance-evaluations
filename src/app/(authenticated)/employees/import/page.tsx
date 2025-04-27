@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function ImportEmployeesPage() {
   return (
-    <div className="space-y-6">
+    <div className="max-w-5xl mx-auto space-y-8">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Import Employees</h1>
@@ -22,7 +22,7 @@ export default function ImportEmployeesPage() {
       </div>
       
       <div className="space-y-4">
-        <div className="rounded-lg border p-6">
+        <div className="rounded-lg border p-8 bg-card shadow-sm">
           <EmployeeImportForm />
         </div>
       </div>
