@@ -15,7 +15,13 @@ import { getScheduleById, updateScheduleStatus } from "@/lib/firebase/schedules"
 import { EvaluationSchedule } from "@/types/database";
 import { useJobFunctions } from "@/hooks/use-job-functions";
 
-export default function ScheduleDetailsPage({ params }: { params: { id: string } }) {
+interface SchedulePageProps {
+  params: {
+    id: string;
+  };
+}
+
+export default function ScheduleDetailsPage({ params }: SchedulePageProps) {
   const [schedule, setSchedule] = useState<EvaluationSchedule | null>(null);
   const [loading, setLoading] = useState(true);
   const { jobFunctions } = useJobFunctions();
