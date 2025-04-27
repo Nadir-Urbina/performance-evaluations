@@ -15,7 +15,13 @@ import { getScheduleById, updateScheduleStatus } from "@/lib/firebase/schedules"
 import { EvaluationSchedule } from "@/types/database";
 import { useJobFunctions } from "@/hooks/use-job-functions";
 
-export default function ScheduleDetailsPage({ params }) {
+// Define a simple type for the params
+type DynamicRouteParams = {
+  id: string;
+  [key: string]: string | string[];
+};
+
+export default function ScheduleDetailsPage({ params }: { params: DynamicRouteParams }) {
   const [schedule, setSchedule] = useState<EvaluationSchedule | null>(null);
   const [loading, setLoading] = useState(true);
   const { jobFunctions } = useJobFunctions();
