@@ -1,8 +1,9 @@
 "use client";
 
+// @ts-ignore - Next.js 15 type conflicts
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { ChevronLeft, CalendarRange, Loader2 } from "lucide-react";
 import { format } from "date-fns";
 import { toast } from "sonner";
@@ -15,13 +16,11 @@ import { getScheduleById, updateScheduleStatus } from "@/lib/firebase/schedules"
 import { EvaluationSchedule } from "@/types/database";
 import { useJobFunctions } from "@/hooks/use-job-functions";
 
-// Define a simple type for the params
-type DynamicRouteParams = {
-  id: string;
-  [key: string]: string | string[];
-};
-
-export default function ScheduleDetailsPage({ params }: { params: DynamicRouteParams }) {
+export default function ScheduleDetailsPage() {
+  // Use the useParams hook from next/navigation instead
+  const params = useParams();
+  const scheduleId = params.id as string;
+  
   const [schedule, setSchedule] = useState<EvaluationSchedule | null>(null);
   const [loading, setLoading] = useState(true);
   const { jobFunctions } = useJobFunctions();
@@ -31,7 +30,7 @@ export default function ScheduleDetailsPage({ params }: { params: DynamicRoutePa
     async function fetchSchedule() {
       setLoading(true);
       try {
-        const scheduleData = await getScheduleById(params.id);
+        const scheduleData = await getScheduleById(scheduleId);
         setSchedule(scheduleData);
       } catch (error) {
         console.error("Error fetching schedule:", error);
@@ -44,7 +43,7 @@ export default function ScheduleDetailsPage({ params }: { params: DynamicRoutePa
     }
 
     fetchSchedule();
-  }, [params.id]);
+  }, [scheduleId]);
 
   const getStatusBadge = (status: EvaluationSchedule['status']) => {
     switch (status) {
