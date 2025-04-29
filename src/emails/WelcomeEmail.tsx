@@ -42,8 +42,6 @@ export const WelcomeEmail = ({
           </Text>
           <Section style={buttonContainer}>
             <Button
-              pX={20}
-              pY={12}
               style={button}
               href="https://simpleevaluation.com/dashboard"
             >
@@ -126,6 +124,7 @@ const button = {
   textAlign: 'center' as const,
   display: 'inline-block',
   margin: '0 auto',
+  padding: '12px 20px',
 };
 
 const listItem = {
