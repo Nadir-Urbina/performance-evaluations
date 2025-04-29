@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { doc, collection, addDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore";
+import { doc, collection, addDoc, updateDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAuth } from "@/providers/auth-provider";
 import { Button } from "@/components/ui/button";
@@ -87,7 +87,7 @@ export default function EmployeeForm({ initialData, isEditing = false }: Employe
       if (isEditing && initialData?.id) {
         // Update existing employee
         const employeeRef = doc(db, "employees", initialData.id);
-        await addDoc(employeeRef, {
+        await updateDoc(employeeRef, {
           ...employeeData,
           updatedAt: serverTimestamp(),
         });
