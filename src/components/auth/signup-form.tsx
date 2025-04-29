@@ -141,7 +141,7 @@ export function SignUpForm() {
         }, { merge: true });
         
         toast({
-          variant: "info",
+          variant: "default",
           title: "Welcome back",
           description: "You're already registered with this Google account.",
         });
