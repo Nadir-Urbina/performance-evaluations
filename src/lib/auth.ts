@@ -111,11 +111,12 @@ export const authOptions: NextAuthOptions = {
         return {
           ...token,
           id: user.id,
-          role: user.role,
-          organizationId: user.organizationId,
+          role: user.role || "user", // Provide default values for required properties
+          organizationId: user.organizationId || "",
         };
       }
       
+      // Subsequent calls after sign in
       return token;
     },
     async session({ session, token }) {
