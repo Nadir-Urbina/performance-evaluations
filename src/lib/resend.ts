@@ -6,6 +6,14 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 // Email sender address
 const fromEmail = process.env.NEXT_PUBLIC_EMAIL_FROM || 'notifications@simpleevaluation.com';
 
+// Import email templates that exist
+import WelcomeEmail from '@/emails/WelcomeEmail';
+// These templates will be implemented later
+// import EvaluationNotificationEmail from '@/emails/EvaluationNotificationEmail';
+// import ApprovalRequestEmail from '@/emails/ApprovalRequestEmail';
+// import EvaluationRejectedEmail from '@/emails/EvaluationRejectedEmail';
+// import CompletedEvaluationEmail from '@/emails/CompletedEvaluationEmail';
+
 /**
  * Send welcome email to new user
  */
@@ -34,7 +42,9 @@ export async function sendWelcomeEmail(
 
 /**
  * Send evaluation notification email
+ * To be implemented
  */
+/* 
 export async function sendEvaluationNotificationEmail(
   userEmail: string,
   userName: string,
@@ -59,10 +69,13 @@ export async function sendEvaluationNotificationEmail(
     return { success: false, error };
   }
 }
+*/
 
 /**
  * Send approval request email
+ * To be implemented
  */
+/*
 export async function sendApprovalRequestEmail(
   userEmail: string,
   userName: string,
@@ -89,10 +102,13 @@ export async function sendApprovalRequestEmail(
     return { success: false, error };
   }
 }
+*/
 
 /**
  * Send evaluation rejected email
+ * To be implemented
  */
+/*
 export async function sendEvaluationRejectedEmail(
   userEmail: string,
   userName: string,
@@ -121,10 +137,13 @@ export async function sendEvaluationRejectedEmail(
     return { success: false, error };
   }
 }
+*/
 
 /**
  * Send completed evaluation notification
+ * To be implemented
  */
+/*
 export async function sendCompletedEvaluationEmail(
   userEmail: string,
   userName: string,
@@ -151,12 +170,6 @@ export async function sendCompletedEvaluationEmail(
     return { success: false, error };
   }
 }
+*/
 
-export { resend };
-
-// Import email templates
-import WelcomeEmail from '@/emails/WelcomeEmail';
-import EvaluationNotificationEmail from '@/emails/EvaluationNotificationEmail';
-import ApprovalRequestEmail from '@/emails/ApprovalRequestEmail';
-import EvaluationRejectedEmail from '@/emails/EvaluationRejectedEmail';
-import CompletedEvaluationEmail from '@/emails/CompletedEvaluationEmail'; 
+export { resend }; 
