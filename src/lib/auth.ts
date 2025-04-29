@@ -5,6 +5,34 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 
+// Extend the built-in NextAuth types to include our custom properties
+declare module "next-auth" {
+  interface User {
+    id: string;
+    role?: string;
+    organizationId?: string;
+  }
+
+  interface Session {
+    user: {
+      id: string;
+      role: string;
+      organizationId: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+    }
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    id: string;
+    role: string;
+    organizationId: string;
+  }
+}
+
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
