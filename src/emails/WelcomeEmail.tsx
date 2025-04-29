@@ -35,7 +35,7 @@ export const WelcomeEmail = ({
             Hello {userName},
           </Text>
           <Text style={text}>
-            Thank you for signing up for Simple Evaluation! We're excited to have you and {organizationName} on board.
+            Thank you for signing up for Simple Evaluation! We&apos;re excited to have you and {organizationName} on board.
           </Text>
           <Text style={text}>
             With Simple Evaluation, you can easily create custom performance evaluations, manage approval flows, and gain valuable insights to help your team succeed.
@@ -59,7 +59,7 @@ export const WelcomeEmail = ({
             <li style={listItem}>Schedule your first evaluation period</li>
           </ul>
           <Text style={text}>
-            If you have any questions or need assistance, please don't hesitate to reach out to our support team.
+            If you have any questions or need assistance, please don&apos;t hesitate to reach out to our support team.
           </Text>
           <Text style={text}>
             Best regards,<br />

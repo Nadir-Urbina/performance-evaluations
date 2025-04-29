@@ -162,7 +162,7 @@ export default function LandingPage() {
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Customizable to your needs</h3>
                     <p className="text-muted-foreground">
-                      Easily adapt evaluation forms and workflows to match your organization's unique structure and values.
+                      Easily adapt evaluation forms and workflows to match your organization&apos;s unique structure and values.
                     </p>
                   </div>
                 </div>
@@ -338,12 +338,12 @@ export default function LandingPage() {
                     ))}
                   </div>
                   <CardTitle className="text-lg">
-                    "Complete game-changer for our quarterly reviews"
+                    &quot;Complete game-changer for our quarterly reviews&quot;
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    "We used to dread performance reviews. Simple Evaluation made the process 3x faster and our employees actually look forward to receiving feedback now."
+                    &quot;We used to dread performance reviews. Simple Evaluation made the process 3x faster and our employees actually look forward to receiving feedback now.&quot;
                   </p>
                 </CardContent>
                 <CardFooter>
@@ -363,12 +363,12 @@ export default function LandingPage() {
                     ))}
                   </div>
                   <CardTitle className="text-lg">
-                    "Perfect for our growing team"
+                    &quot;Perfect for our growing team&quot;
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    "As we scaled from 10 to 50 employees, we needed a system that could grow with us. Simple Evaluation provided just the right balance of structure and flexibility."
+                    &quot;As we scaled from 10 to 50 employees, we needed a system that could grow with us. Simple Evaluation provided just the right balance of structure and flexibility.&quot;
                   </p>
                 </CardContent>
                 <CardFooter>
@@ -388,12 +388,12 @@ export default function LandingPage() {
                     ))}
                   </div>
                   <CardTitle className="text-lg">
-                    "Finally, evaluations that actually improve performance"
+                    &quot;Finally, evaluations that actually improve performance&quot;
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    "The analytics feature helped us identify skill gaps across departments. We've seen a 27% improvement in team performance since implementing Simple Evaluation."
+                    &quot;The analytics feature helped us identify skill gaps across departments. We&apos;ve seen a 27% improvement in team performance since implementing Simple Evaluation.&quot;
                   </p>
                 </CardContent>
                 <CardFooter>
@@ -484,7 +484,7 @@ export default function LandingPage() {
             </div>
             <div className="mt-12 text-center max-w-2xl mx-auto">
               <p className="text-muted-foreground">
-                All plans include a 14-day free trial. No credit card required until you're ready to upgrade.
+                All plans include a 14-day free trial. No credit card required until you&apos;re ready to upgrade.
               </p>
               <p className="mt-2 text-muted-foreground">
                 Need a custom solution for a larger organization? <Link href="#" className="text-primary font-medium hover:underline">Contact us</Link> about our Enterprise options.
@@ -518,7 +518,7 @@ export default function LandingPage() {
               <div className="border rounded-lg p-6">
                 <h3 className="text-xl font-semibold mb-2">How secure is our data?</h3>
                 <p className="text-muted-foreground">
-                  We take security seriously. All data is encrypted both in transit and at rest. We're GDPR compliant, and we never share your data with third parties. Each organization's data is completely isolated.
+                  We take security seriously. All data is encrypted both in transit and at rest. We&apos;re GDPR compliant, and we never share your data with third parties. Each organization&apos;s data is completely isolated.
                 </p>
               </div>
               <div className="border rounded-lg p-6">
